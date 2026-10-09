@@ -1,5 +1,21 @@
 # go-usage-ledger
 
+## Moved to substrate
+
+This standalone repository is deprecated. New development lives in the
+[`github.com/hollis-labs/substrate/llm-core`](https://github.com/hollis-labs/substrate/tree/llm-core/v0.1.0/llm-core)
+module, released as **`llm-core/v0.1.0`**.
+
+```sh
+go get github.com/hollis-labs/substrate/llm-core@v0.1.0
+```
+
+Follow the [package and API migration guide](https://github.com/hollis-labs/substrate/blob/llm-core/v0.1.0/llm-core/usageledger/MIGRATION.md) when updating imports;
+the consolidation can include API changes. Existing standalone tags and history
+are preserved. The documentation below describes the standalone releases and
+is retained for historical reference. Applications migrate separately; this
+redirect does not deploy or update any consumer.
+
 Disjoint LLM token-usage ledger: fixed core plus Dims, per-component provenance, derived totals.
 
 A `Usage` has five disjoint core components (uncached input, cache read, cache write, output, reasoning) and an open `Dims` map for provider-specific extras. Each component is a token count plus a provenance: `measured`, `estimated` or `unknown`. A component the provider did not report is `unknown`, never a silent zero. The total is not stored: `TotalTokens()` sums the components and `TotalProvenance()` reports the worst provenance among them. A `Row` wraps a `Usage` with identity and an optional `PriceSnapshot` (the rates in effect when it was recorded).
